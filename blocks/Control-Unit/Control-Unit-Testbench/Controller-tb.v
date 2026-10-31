@@ -33,7 +33,11 @@ Controller Controller_ins(
 initial begin 
 $monitor("op = %b RegWrite = %b ImmSrc = %b ALUSrc = %b MemWrite = %b ResultSrc = %b Branch = %b ALUOp = %b funct3 = %b op[5] = %b funct7_b5 = %b ALUControl = %b Zero = %b", 
 op, RegWrite, ImmSrc, ALUSrc, MemWrite, ResultSrc, Branch, ALUOp, funct3, op[5], funct7_b5, ALUControl, Zero);
-op = 7'b0000011; ALUOp = 2'b00; funct3 = 3'bxxx; funct7_b5 = 1'bx; Zero = 1'b0;
+op = 7'b0000011; ALUOp = 2'b00; funct3 = 3'bxxx; funct7_b5 = 1'bx; Zero = 1'b0;	//lw
+#10;
+op = 7'b0100011; ALUOp = 2'b00; funct3 = 3'bxxx; funct7_b5 = 1'bx; Zero = 1'b0;	//sw
+#10;
+op = 7'b0110011; ALUOp = 2'b10; funct3 = 3'b000; funct7_b5 = 1'b1; Zero = 1'b0;	//add
 #10;
 $finish();
 end
