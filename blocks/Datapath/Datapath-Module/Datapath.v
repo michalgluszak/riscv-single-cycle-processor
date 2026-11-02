@@ -3,17 +3,17 @@
 module datapath(
 	input clk,
 	input reset,
-	input [31:0] pc,
-	input PCSrc,
-	
-	input instr[31:0],
+	input PCSrc,	
+	input Instr[31:0],
 	input ImmSrc [1:0],
-	input RegWrite,
-	input [31:0] WriteData,
+	input RegWrite,	
 	input [2:0] ALUControl,
 	input [31:0] ALUResult,
 	input [31:0] ReadData,
 	input ResultSrc,
+	output [31:0] ALUResult,
+	output [31:0] WriteData,
+	output [31:0] pc,
 	output Zero
 );
 
