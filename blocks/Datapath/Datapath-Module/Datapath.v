@@ -13,7 +13,8 @@ module datapath(
 	input [2:0] ALUControl,
 	input [31:0] ALUResult,
 	input [31:0] ReadData,
-	input ResultSrc
+	input ResultSrc,
+	output Zero
 );
 
 wire [31:0] PCNext;
@@ -66,8 +67,17 @@ extend extendins(
 assign WriteData = SrcB;
 
 //ALU logic
-alu alu(.SrcA(SrcA), .SrcB(SrcB), .ALUControl(ALUControl), .ALUResult(ALUResult));
+alu alu(
+	.SrcA(SrcA), 
+	.SrcB(SrcB), 
+	.ALUControl(ALUControl), 
+	.ALUResult(ALUResult),
+	.Zero(Zero));
 
-mux2x1 resultmux(.in0(ALUResult), .in1(ReadData), .s(ResultSrc), .out(Result));
+mux2x1 resultmux(
+	.in0(ALUResult), 
+	.in1(ReadData), 
+	.s(ResultSrc), 
+	.out(Result));
 
 endmodule
