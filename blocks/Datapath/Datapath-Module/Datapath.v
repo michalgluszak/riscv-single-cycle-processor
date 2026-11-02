@@ -9,14 +9,18 @@ module datapath(
 	input instr[31:0],
 	input ImmSrc [1:0],
 	input RegWrite,
-	input [31:0] WriteData
+	input [31:0] WriteData,
+	input [2:0] ALUControl,
+	input [31:0] ALUResult,
+	input [31:0] ReadData,
+	input ResultSrc
 );
 
 wire [31:0] PCNext;
 wire [31:0] PCPlus4;
 wire [31:0] PCTarget;
 wire [31:0] ImmExt;
-wire [31:0] result;
+wire [31:0] Result;
 wire [31:0] SrcA, SrcB;
 
 //next program counter logic
@@ -50,7 +54,7 @@ registerfile regfile(
 	.a1(instr[19:15]), 
 	.a2(instr[24:20]), 
 	.a3(instr[11:7]), 
-	.wd3(result), 
+	.wd3(Result), 
 	.rd1(SrcA), 
 	.rd2(SrcB));
 
@@ -61,6 +65,9 @@ extend extendins(
 
 assign WriteData = SrcB;
 
-//3
+//ALU logic
+alu alu(.SrcA(SrcA), .SrcB(SrcB), .ALUControl(ALUControl), .ALUResult(ALUResult));
+
+mux2x1 resultmux(.in0(ALUResult), .in1(ReadData), .s(ResultSrc), .out(Result));
 
 endmodule
