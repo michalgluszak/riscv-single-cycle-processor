@@ -1,28 +1,26 @@
 `timescale 1ns/1ps
 
 module datapath(
-	input clk,
-	input reset,
-	input PCSrc,	
-	input Instr[31:0],
-	input ImmSrc [1:0],
-	input RegWrite,	
-	input [2:0] ALUControl,
-	input [31:0] ALUResult,
-	input [31:0] ReadData,
+	input clk, 
+	input reset, 
+	input PCSrc,
 	input ResultSrc,
+	input [2:0] ALUControl,
+	input ALUSrc,
+	input [1:0] ImmSrc,
+	input RegWrite,
+	input [31:0] Instr,
+	input [31:0] ReadData,	
+	output Zero,
 	output [31:0] ALUResult,
 	output [31:0] WriteData,
-	output [31:0] pc,
-	output Zero
+	output [31:0] PC
 );
 
-wire [31:0] PCNext;
-wire [31:0] PCPlus4;
-wire [31:0] PCTarget;
+wire [31:0] PCPlus4, PCTarget, PCNext;
 wire [31:0] ImmExt;
-wire [31:0] Result;
 wire [31:0] SrcA, SrcB;
+wire [31:0] Result;
 
 //next program counter logic
 mux2x1 pcmux(
@@ -31,48 +29,51 @@ mux2x1 pcmux(
 	.s(PCSrc), 
 	.out(PCNext));
 
-d_flip_flop #(.WIDTH(32)) pcreg(
+d_flipflop #(.WIDTH(32)) pcreg(
 	.clk(clk), 
 	.reset(reset), 
 	.d(PCNext), 
-	.q(pc));
+	.q(PC));
 
 adder pcadd4(
-	.a(pc), 
-	.b(32'd4), 
-	.result(PCPlus4));
+	.a(PC), 
+	.b(32'd4), .
+	result(PCPlus4));
 
 adder pcaddbranch(
-	.a(pc), 
+	.a(PC), 
 	.b(ImmExt), 
 	.result(PCTarget));
 
-
 //register file logic
-registerfile regfile(
+register_file regfile(
 	.clk(clk), 
 	.we3(RegWrite), 
-	.a1(instr[19:15]), 
-	.a2(instr[24:20]), 
-	.a3(instr[11:7]), 
+	.a1(Instr[19:15]), 
+	.a2(Instr[24:20]), 
+	.a3(Instr[11:7]), 
 	.wd3(Result), 
 	.rd1(SrcA), 
-	.rd2(SrcB));
+	.rd2(WriteData));
 
-extend extendins(
+extend extend(
 	.ImmSrc(ImmSrc), 
 	.Instr(Instr[31:7]), 
 	.ImmExt(ImmExt));
 
-assign WriteData = SrcB;
+//ALU logic 
+mux2x1 srcbmux(
+	.in0(WriteData), 
+	.in1(ImmExt), 
+	.s(ALUSrc), 
+	.out(SrcB));
 
-//ALU logic
 alu alu(
 	.SrcA(SrcA), 
 	.SrcB(SrcB), 
 	.ALUControl(ALUControl), 
-	.ALUResult(ALUResult),
-	.Zero(Zero));
+	.Zero(Zero), 
+	.ALUResult(ALUResult));
 
 mux2x1 resultmux(
 	.in0(ALUResult), 
