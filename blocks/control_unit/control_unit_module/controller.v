@@ -5,9 +5,7 @@ module controller(
 	input [6:0] op,
 	input [2:0] funct3,
 	input funct7_b5,
-	input [1:0] ALUOp,
 	output PCSrc,
-	output Branch,
 	output ResultSrc,
 	output MemWrite,
 	output ALUSrc,
@@ -15,6 +13,9 @@ module controller(
 	output RegWrite,
 	output [2:0] ALUControl
 );
+
+wire Branch;
+wire [1:0]ALUOp;
 
 assign PCSrc = Zero & Branch;
 
