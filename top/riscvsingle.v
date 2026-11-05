@@ -8,8 +8,7 @@ module riscvsingle(
 	output MemWrite,
 	output [31:0] ALUResult,	
 	output [31:0] WriteData,
-	output [31:0] PC,
-	
+	output [31:0] PC	
 );
 
 wire Zero, PCSrc, ResultSrc, ALUSrc, RegWrite;
@@ -40,7 +39,7 @@ datapath datapath_ins(
 	.RegWrite(RegWrite),
 	.Instr(Instr), 
 	.ReadData(ReadData),
-	.Zero(Zero)
+	.Zero(Zero),
 	.ALUResult(ALUResult),
 	.WriteData(WriteData),
 	.PC(PC));
