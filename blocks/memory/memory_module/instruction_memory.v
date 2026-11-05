@@ -8,7 +8,7 @@ module instruction_memory(
 reg [31:0] RAM [0:63];
 
 initial begin 
-	$readmemh("memory_module/riscvtest.mem", RAM);
+	$readmemh("instruction/riscvtest.mem", RAM);
 end
 
 assign rd = RAM[a[31:2]];
