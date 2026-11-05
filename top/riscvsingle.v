@@ -28,7 +28,7 @@ controller controller_ins(
 	.RegWrite(RegWrite),
 	.ALUControl(ALUControl));
 
-datapath(
+datapath datapath_ins(
 	.clk(clk), 
 	.reset(reset), 
 	.PCSrc(PCSrc), 
