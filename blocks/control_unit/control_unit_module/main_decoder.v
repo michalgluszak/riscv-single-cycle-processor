@@ -20,6 +20,7 @@ always @(*) begin
 		7'b0100011 : controls = 9'b0_01_1_1_?_0_00; //sw
 		7'b0110011 : controls = 9'b1_??_0_0_0_0_10; //R-type
 		7'b1100011 : controls = 9'b0_10_0_0_?_1_01; //beq
+		7'b0010011 : controls = 9'b1_00_1_0_0_0_10; //addi
 		default : controls = 9'b?_??_?_?_?_?_??;
 	endcase
 end

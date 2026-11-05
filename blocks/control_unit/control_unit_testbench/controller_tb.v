@@ -35,6 +35,8 @@ op = 7'b0100011; funct3 = 3'bxxx; funct7_b5 = 1'bx; Zero = 1'b0; //sw
 #10;
 op = 7'b0110011; funct3 = 3'b000; funct7_b5 = 1'b1; Zero = 1'b0; //add
 #10;
+op = 7'b0010011; funct3 = 3'b000; funct7_b5 = 1'b1; Zero = 1'b0; //add
+#10;
 $finish();
 end
 
