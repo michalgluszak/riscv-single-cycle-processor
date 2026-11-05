@@ -5,13 +5,14 @@ module riscvsingle(
 	input reset,
 	input [31:0] Instr,
 	input [31:0] ReadData,
+	output MemWrite,
 	output [31:0] ALUResult,	
 	output [31:0] WriteData,
 	output [31:0] PC,
 	
 );
 
-wire Zero, PCSrc, ResultSrc, MemWrite, ALUSrc, RegWrite;
+wire Zero, PCSrc, ResultSrc, ALUSrc, RegWrite;
 wire [1:0] ImmSrc;
 wire [2:0] ALUControl;
 
