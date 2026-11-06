@@ -18,10 +18,15 @@ data_memory data_memory_ins(
 
 initial begin 
 $monitor("a = %0d wd = %0d we = %b rd = %0d", a, wd, we, rd);
-a = 32'd31; wd = 32'd35; we = 1'b1;
+a = 32'd4; wd = 32'd35; we = 1'b1;
 #10;
-a = 32'd31; wd = 32'bx; we = 1'b0;
+a = 32'd4; wd = 32'bx; we = 1'b0;
 #10;
+a = 32'd12; wd = 32'd40; we = 1'b1;
+#10;
+a = 32'd12; wd = 32'bx; we = 1'b0;
+#10;
+$display("RAM[1] = %0d RAM[3] = %0d", data_memory_ins.RAM[1], data_memory_ins.RAM[3]);
 $finish();
 end
 
