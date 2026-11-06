@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 
 module register_file_tb;
-reg clk;
+reg clk = 1'b0;
 reg we3;
 reg [4:0] a1, a2, a3;
 reg [31:0] wd3;
@@ -31,6 +31,7 @@ we3 = 1'b0; a1 = 5'd21; a2 = 5'd18;
 #10;
 we3 = 1'b0; a1 = 5'd21; a2 = 5'd19;
 #10;
+$display("RF[18] = %0d RF[19] = %0d RF[21] = %0d", uut.rf[18], uut.rf[19], uut.rf[21]);
 $finish();
 end
 
