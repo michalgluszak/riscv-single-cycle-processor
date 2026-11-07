@@ -13,17 +13,7 @@ always @(*) begin
 		3'b001 : ALUResult = SrcA - SrcB; //Substract
 		3'b010 : ALUResult = SrcA & SrcB; //AND
 		3'b011 : ALUResult = SrcA | SrcB; //OR
-		3'b101 : 
-			begin
-				if(SrcA > SrcB) begin 
-					ALUResult = SrcA;
-				end else if (SrcB > SrcA) begin 
-					ALUResult = SrcB;
-				end else begin 
-					ALUResult = 32'b0;
-				end
-			end
-		default : ALUResult = 32'bx;
+	default : ALUResult = 32'bx;
 	endcase
 end
 

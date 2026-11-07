@@ -25,12 +25,6 @@ ALUControl = 3'b010; SrcA = 32'd26; SrcB = 32'd24; //AND
 #10; 
 ALUControl = 3'b011; SrcA = 32'd26; SrcB = 32'd24; //OR
 #10;
-ALUControl = 3'b101; SrcA = 32'd14; SrcB = 32'd8; //SLT SrcA > SrcB
-#10;
-ALUControl = 3'b101; SrcA = 32'd7; SrcB = 32'd15; //SLT SrcA < SrcB
-#10;
-ALUControl = 3'b101; SrcA = 32'd26; SrcB = 32'd26; //SLT SrcA == SrcB 
-#10;
 $finish();
 end
 
