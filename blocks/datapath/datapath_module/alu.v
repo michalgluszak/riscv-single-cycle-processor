@@ -13,6 +13,7 @@ always @(*) begin
 		3'b001 : ALUResult = SrcA - SrcB; //Substract
 		3'b010 : ALUResult = SrcA & SrcB; //AND
 		3'b011 : ALUResult = SrcA | SrcB; //OR
+		3'b101 : ALUResult = $signed(SrcA) < $signed(SrcB); //slt
 	default : ALUResult = 32'bx;
 	endcase
 end
