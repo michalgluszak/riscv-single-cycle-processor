@@ -47,7 +47,7 @@ reset = 1'b0;
 	end
 
 	if(i == 5) begin 
-		$display("Processor work isucceeded");
+		$display("Processor work succeeded");
 	end
 
 $finish();
